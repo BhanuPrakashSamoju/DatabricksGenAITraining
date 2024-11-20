@@ -1,0 +1,59 @@
+Here is the code to perform binary sort in Python:
+
+```python
+def binary_sort(arr):
+    """
+    Sorts the given array using binary sort algorithm.
+
+    Parameters:
+    arr (list): The array to be sorted.
+
+    Returns:
+    list: The sorted array.
+    """
+    if len(arr) <= 1:
+        return arr
+
+    mid = len(arr) // 2
+    left = arr[:mid]
+    right = arr[mid:]
+
+    left = binary_sort(left)
+    right = binary_sort(right)
+
+    return merge(left, right)
+
+
+def merge(left, right):
+    """
+    Merges two sorted arrays into a single sorted array.
+
+    Parameters:
+    left (list): The left sorted array.
+    right (list): The right sorted array.
+
+    Returns:
+    list: The merged and sorted array.
+    """
+    merged = []
+
+    while left and right:
+        if left[0] < right[0]:
+            merged.append(left.pop(0))
+        else:
+            merged.append(right.pop(0))
+
+    merged.extend(left)
+    merged.extend(right)
+
+    return merged
+
+
+# Test the binary_sort function
+arr = [2, 6, 8, 1, 5, 3]
+sorted_arr = binary_sort(arr)
+print("Sorted array:", sorted_arr)
+```
+
+Summary:
+The code defines a function called `binary_sort` that takes an array as input and sorts it using the binary sort algorithm. The `binary_sort` function internally uses a helper function called `merge` to merge two sorted arrays into a single sorted array. The code then tests the `binary_sort` function by sorting the array `[2, 6, 8, 1, 5, 3]` and prints the sorted array.
