@@ -1,59 +1,48 @@
-Here is the code to perform binary sort in Python:
+Sure! Here's the code to perform binary sort on the given list:
 
 ```python
 def binary_sort(arr):
-    """
-    Sorts the given array using binary sort algorithm.
+    # Sort the list using binary sort
+    for i in range(1, len(arr)):
+        # Get the current element to be sorted
+        key = arr[i]
 
-    Parameters:
-    arr (list): The array to be sorted.
+        # Set the initial positions for binary search
+        low = 0
+        high = i - 1
 
-    Returns:
-    list: The sorted array.
-    """
-    if len(arr) <= 1:
-        return arr
+        # Perform binary search to find the correct position for the current element
+        while low <= high:
+            # Calculate the middle index of the current range
+            mid = (low + high) // 2
 
-    mid = len(arr) // 2
-    left = arr[:mid]
-    right = arr[mid:]
+            # If the current element is smaller than the middle element, search in the left half
+            if key < arr[mid]:
+                high = mid - 1
+            # If the current element is greater than the middle element, search in the right half
+            else:
+                low = mid + 1
 
-    left = binary_sort(left)
-    right = binary_sort(right)
+        # Shift the elements greater than the current element to the right
+        for j in range(i, low, -1):
+            arr[j] = arr[j - 1]
 
-    return merge(left, right)
+        # Insert the current element at the correct position
+        arr[low] = key
 
+    # Return the sorted list
+    return arr
 
-def merge(left, right):
-    """
-    Merges two sorted arrays into a single sorted array.
-
-    Parameters:
-    left (list): The left sorted array.
-    right (list): The right sorted array.
-
-    Returns:
-    list: The merged and sorted array.
-    """
-    merged = []
-
-    while left and right:
-        if left[0] < right[0]:
-            merged.append(left.pop(0))
-        else:
-            merged.append(right.pop(0))
-
-    merged.extend(left)
-    merged.extend(right)
-
-    return merged
-
-
-# Test the binary_sort function
+# Test the function
 arr = [2, 6, 8, 1, 5, 3]
 sorted_arr = binary_sort(arr)
-print("Sorted array:", sorted_arr)
+print(sorted_arr)
 ```
 
-Summary:
-The code defines a function called `binary_sort` that takes an array as input and sorts it using the binary sort algorithm. The `binary_sort` function internally uses a helper function called `merge` to merge two sorted arrays into a single sorted array. The code then tests the `binary_sort` function by sorting the array `[2, 6, 8, 1, 5, 3]` and prints the sorted array.
+In this code, we define a function `binary_sort` that takes an array (`arr`) as input and performs binary sort on it. 
+
+To perform binary sort, we iterate through the list starting from the second element. For each element, we find its correct position using binary search. We shift the elements greater than the current element to the right and insert the current element at the correct position.
+
+Finally, we test the function by calling it with the input list `[2, 6, 8, 1, 5, 3]` and print the sorted list.
+
+Please note that the code is written in Python as you haven't specified any language preference. If you want the code in a different language, please let me know.
